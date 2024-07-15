@@ -1,0 +1,25 @@
+name: Copybara Migration
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Run Copybara Migration
+        run: |
+          podman run --rm -v ${PWD}:/app copybara-image
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
