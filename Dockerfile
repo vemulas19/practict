@@ -1,4 +1,4 @@
-FROM artifactorycn.netcracker.com:17091/copybara/copybara:fd946edff3c33ccbfc06964023e120bfadffa7cf
+FROM abc
 
 # Copy necessary files
 COPY . /app

@@ -3,8 +3,8 @@ This module contains copybara migration config for NRM to ngx_staging repo.
 Visit https://github.com/google/copybara for more details.
 """
 
-source_url = "https://vemulas19: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@github.com/vemulas19/practict.git"
-destination_url = "https://vemulas19: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@github.com/vemulas19/practict2.git"
+source_url = "https://vemulas19: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@github.com/vemulas19/practict.git"
+destination_url = "https://vemulas19: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@github.com/vemulas19/practict2.git"
 
 core.workflow(
     name = "default",
@@ -20,9 +20,9 @@ core.workflow(
     destination_files = glob(["**"]),
     mode = "ITERATIVE",
     authoring = authoring.allowed(
-        default = "Srikanth <vemulas19@gmail.com>",
+        default = "SrikGit <srikgit@gmail.com>",
         allowlist = [
-            "vemulas19@gmail.com",
+            "vemulas19@gmail.com"
         ],
     ),
 )
