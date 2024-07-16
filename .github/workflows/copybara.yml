@@ -3,25 +3,22 @@ name: Copybara Migration
 on:
   push:
     branches:
-      - master
+      - master  # Adjust the branch name as needed
 
 jobs:
-  migrate:
+  build-and-migrate:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '11'
-          architecture: 'x64'
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker Image
+        run: docker build -t copybara-image .
 
       - name: Run Copybara Migration
         run: |
-          podman run --rm -v ${PWD}:/app copybara-image
-        env:
-          GH_PAT: ${{ secrets.GH_TOKEN }}
+          docker run --rm -v ${{ github.workspace }}:/app copybara-image migrate ./copy.bara.sky --force --init-history --git-committer-email "vemulas@gmail.com" --git-committer-name "Srikanth" --commands-timeout 12000s --repo-timeout=20000s
